@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/index.css">
+    <link>
+    <title>Форма</title>
+</head>
+<body>
+<form name="myForm" action="/reg" method="POST" id="regForm" onsubmit="return validationForm()">
+    <lable id="title">Запрос на регистрацию</lable>
+    <table>
+        <tboby>
+            <tr>
+                <td class="lbl">Имя:</td>
+                <td><input type="text" name="firstName" id="firstName" class="box"/>
+            </tr>
+            <tr>
+                <td class="lbl">Фамилия:</td>
+                <td><input type="text" name="lastName" id="lastName" class="box"/>
+            </tr>
+            <tr>
+                <td class="lbl">Дата рождения:</td>
+                <td><input type="date" name="dateOfBirthday" id="dataOfBirthday" value="today"
+                           max="2023-04-02" class="box"/>
+
+            </tr>
+            <tr>
+                <td class="lbl">E-mail:</td>
+                <td><input type="email" name="mail" id="mail" class="box"/>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="lbl">Пароль:</td>
+                <td><input type="password" name="password1" id="password1" class="box"/>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="lbl">Подтвердить:</td>
+                <td><input type="password" name="password2" id="password2" class="box"/>
+            </tr>
+        </tboby>
+    </table>
+    <input type="submit" value="Отправить заявку" id="send"/>
+</form>
+</body>
+<script src="index.js"></script>
+</html>
