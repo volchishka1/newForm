@@ -14,9 +14,9 @@ function validationForm()
             {
                 if(validateEmail(email))
                 {
-                    if(countryselect(password))
+                    if(validPassword(password))
                     {
-                        if(allnumeric(checkPassword))
+                        if(validCheckPassword(password, checkPassword))
                         {
                         }
                     }
@@ -69,12 +69,13 @@ function dateOfBirthdayDay(dateOfBirthday) {
         dateOfBirthday.focus();
         return false;
     }
+    return true
 
 }
 
 function validateEmail(email)
 {
-    let emailFormat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+    let emailFormat = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     if(email.value.match(emailFormat))
     {
         return true;
@@ -85,4 +86,32 @@ function validateEmail(email)
         email.focus();
         return false;
     }
+}
+
+function validPassword(password)
+{
+    let passwordLength = /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g
+    if(password.value.match(passwordLength))
+    {
+        return true;
+    }
+    else
+    {
+        alert('Пароль должен содержать минимум 8 символов, минимум 1 символ в верхнем регистре, минимум одну цифру 1-9, минимум 1 специальный символ из перечисленных !@#$%');
+        password.focus();
+        return false;
+    }
+
+}
+
+function validCheckPassword(password, checkPassword)
+{
+    if(password.value === checkPassword.value) {
+        return true
+    } else {
+        alert('Пароли должны совпадать')
+        checkPassword.focus();
+        return false
+    }
+
 }
