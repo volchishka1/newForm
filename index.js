@@ -12,7 +12,7 @@ function validationForm()
         {
             if(dateOfBirthdayDay(dateOfBirthday))
             {
-                if(ValidateEmail(email))
+                if(validateEmail(email))
                 {
                     if(countryselect(password))
                     {
@@ -30,12 +30,12 @@ function validationForm()
 function firstName_validation(firstName, min, max)
 {
     let lastNameLength = firstName.value.length;
-    let letters = /^[A-Za-z]+$/;
+    let letters = /^([а-яё\s]+|[a-z\s]+)$/iu;
     if(firstName.value.match(letters))
     {
         return true;
     } else if (lastNameLength === 0 || lastNameLength >= min || lastNameLength < max) {
-        alert('Имя должна содержать от 2 до 25 символов')
+        alert('Имя должно содержать от 2 до 25 символов')
     }
     else
     {
@@ -48,7 +48,7 @@ function firstName_validation(firstName, min, max)
 function lastName_validation(lastName, min, max)
 {
     let lastNameLength = lastName.value.length;
-    let letters = /^[A-Za-z]+$/;
+    let letters = /^([а-яё\s]+|[a-z\s]+)$/iu;
     if(lastName.value.match(letters))
     {
         return true;
@@ -59,6 +59,30 @@ function lastName_validation(lastName, min, max)
     {
         alert('Фамилия содержит недопустимые символы');
         lastName.focus();
+        return false;
+    }
+}
+
+function dateOfBirthdayDay(dateOfBirthday) {
+    if(dateOfBirthday.value === '') {
+        alert('Укажите дату рождения')
+        dateOfBirthday.focus();
+        return false;
+    }
+
+}
+
+function validateEmail(email)
+{
+    let emailFormat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+    if(email.value.match(emailFormat))
+    {
+        return true;
+    }
+    else
+    {
+        alert("You have entered an invalid email address!");
+        email.focus();
         return false;
     }
 }
