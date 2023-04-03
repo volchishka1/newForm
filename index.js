@@ -1,117 +1,113 @@
-function validationForm()
-{
-    let firstName = document.myForm.firstName;
-    let lastName = document.myForm.lastName;
-    let dateOfBirthday = document.myForm.dateOfBirthday;
-    let email = document.myForm.email;
-    let password = document.myForm.password;
-    let checkPassword = document.myForm.checkPassword;
-    if(firstName_validation(firstName,2,25))
-    {
-        if(lastName_validation(lastName,2,25))
-        {
-            if(dateOfBirthdayDay(dateOfBirthday))
-            {
-                if(validateEmail(email))
-                {
-                    if(validPassword(password))
-                    {
-                        if(validCheckPassword(password, checkPassword))
-                        {
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return false;
+function validationForm() {
+    const firstName = document.myForm.firstName;
+    const lastName = document.myForm.lastName;
+    const dateOfBirthday = document.myForm.dateOfBirthday;
+    const email = document.myForm.email;
+    const password = document.myForm.password;
+    const confirmPassword = document.myForm.confirmPassword;
+
+    const firstNameCheck = firstNameValidation(firstName);
+    const lastNameCheck = lastNameValidation(lastName);
+    const dateOfBirthdayCheck = dateOfBirthdayValidation(dateOfBirthday);
+    const emailCheck = emailValidation(email);
+    const passwordCheck = passwordValidation(password);
+    const confirmPasswordCheck = confirmPasswordValidation(confirmPassword);
+
+    return firstNameCheck && lastNameCheck && dateOfBirthdayCheck && emailCheck && passwordCheck && confirmPasswordCheck;
 }
 
-function firstName_validation(firstName, min, max)
-{
-    let lastNameLength = firstName.value.length;
-    let letters = /^([а-яё\s]+|[a-z\s]+)$/iu;
-    if(firstName.value.match(letters))
-    {
+function firstNameValidation(firstName) {
+    let letters = /^([а-яё\s]+|[a-z\s]+){2,25}$/iu;
+    if (firstName.value.match(letters)) {
+        removeErrorBorderColor(firstName);
+        addErrorText(firstName, '');
         return true;
-    } else if (lastNameLength === 0 || lastNameLength >= min || lastNameLength < max) {
-        alert('Имя должно содержать от 2 до 25 символов')
-    }
-    else
-    {
-        alert('Имя содержит недопустимые символы и должно содержать не менее 2 и не более 25 символов');
+    } else {
+        addErrorBorderColor(firstName);
+        addErrorText(firstName, 'Имя содержит недопустимые символы и должно содержать не менее 2 и не более 25 символов');
         firstName.focus();
         return false;
     }
 }
 
-function lastName_validation(lastName, min, max)
-{
-    let lastNameLength = lastName.value.length;
-    let letters = /^([а-яё\s]+|[a-z\s]+)$/iu;
-    if(lastName.value.match(letters))
-    {
+function lastNameValidation(lastName) {
+    let letters = /^([а-яё\s]+|[a-z\s]+){2,25}$/iu;
+    if (lastName.value.match(letters)) {
+        removeErrorBorderColor(lastName);
+        addErrorText(lastName, '');
         return true;
-    } else if (lastNameLength === 0 || lastNameLength >= min || lastNameLength < max) {
-        alert('Фамилия должна содержать от 2 до 25 символов')
-    }
-    else
-    {
-        alert('Фамилия содержит недопустимые символы');
+    } else {
+        addErrorBorderColor(lastName);
+        addErrorText(lastName, 'Фамилия содержит недопустимые символы и должна содержать не менее 2 и не более 25 символов');
         lastName.focus();
         return false;
     }
 }
 
-function dateOfBirthdayDay(dateOfBirthday) {
-    if(dateOfBirthday.value === '') {
-        alert('Укажите дату рождения')
+function dateOfBirthdayValidation(dateOfBirthday) {
+    if (dateOfBirthday.value === '') {
+        addErrorBorderColor(dateOfBirthday);
+        addErrorText(dateOfBirthday, 'Укажите дату рождения')
         dateOfBirthday.focus();
         return false;
     }
+    removeErrorBorderColor(dateOfBirthday);
+    addErrorText(dateOfBirthday, '');
     return true
 
 }
 
-function validateEmail(email)
-{
+function emailValidation(email) {
     let emailFormat = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    if(email.value.match(emailFormat))
-    {
+    if (email.value.match(emailFormat)) {
+        removeErrorBorderColor(email);
+        addErrorText(email, '');
         return true;
-    }
-    else
-    {
-        alert("You have entered an invalid email address!");
+    } else {
+        addErrorBorderColor(email);
+        addErrorText(email, "You have entered an invalid email address!");
         email.focus();
         return false;
     }
 }
 
-function validPassword(password)
-{
+function passwordValidation(password) {
     let passwordLength = /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g
-    if(password.value.match(passwordLength))
-    {
+    if (password.value.match(passwordLength)) {
+        removeErrorBorderColor(password);
+        addErrorText(password, '');
         return true;
-    }
-    else
-    {
-        alert('Пароль должен содержать минимум 8 символов, минимум 1 символ в верхнем регистре, минимум одну цифру 1-9, минимум 1 специальный символ из перечисленных !@#$%');
+    } else {
+        addErrorBorderColor(password);
+        addErrorText(password, 'Пароль должен содержать минимум 8 символов, минимум 1 символ в верхнем регистре, минимум одну цифру 1-9, минимум 1 специальный символ из перечисленных !@#$%');
         password.focus();
         return false;
     }
 
 }
 
-function validCheckPassword(password, checkPassword)
-{
-    if(password.value === checkPassword.value) {
+function confirmPasswordValidation(password, checkPassword) {
+    if (password.value === checkPassword.value) {
+        removeErrorBorderColor(checkPassword);
+        addErrorText(checkPassword, '');
         return true
     } else {
-        alert('Пароли должны совпадать')
+        addErrorBorderColor(checkPassword);
+        addErrorText(checkPassword, 'Пароли должны совпадать')
         checkPassword.focus();
         return false
     }
 
+}
+
+function addErrorBorderColor(input, errorBorderColor = 'errorColorBorder') {
+    input.classList.add(errorBorderColor)
+}
+
+function removeErrorBorderColor(input, errorBorderColor = 'errorColorBorder') {
+    input.classList.remove(errorBorderColor)
+}
+
+function addErrorText(input, errorMessage) {
+    input.parentElement.querySelector('p').innerText = errorMessage
 }

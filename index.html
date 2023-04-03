@@ -8,27 +8,35 @@
     <title>Форма</title>
 </head>
 <body>
-<form name="myForm" action="/reg" method="POST" id="regForm" onsubmit="return validationForm()">
+<form name="myForm" action="https://jsonplaceholder.typicode.com/posts" method="POST" id="regForm" onsubmit="return validationForm()">
     <lable id="title">Запрос на регистрацию</lable>
     <table>
         <tboby>
             <tr>
                 <td class="lbl"><label for="firstName">Имя:</label></td>
                 <td><input type="text" name="firstName" id="firstName" class="box"/>
+                    <p class="error"></p>
+                </td>
             </tr>
             <tr>
                 <td class="lbl"><label for="lastName">Фамилия:</label></td>
                 <td><input type="text" name="lastName" id="lastName" class="box"/>
+                    <p class="error"></p>
+                </td>
             </tr>
             <tr>
                 <td class="lbl"><label for="dateOfBirthday">Дата рождения:</label></td>
                 <td><input type="date" name="dateOfBirthday" id="dateOfBirthday" value="today"
                            max="2023-04-02" class="box"/>
+                    <p class="error"></p>
+                </td>
 
             </tr>
             <tr>
                 <td class="lbl"><label for="email">E-mail:</label></td>
                 <td><input type="email" name="email" id="email" class="box"/>
+                    <p class="error"></p>
+                </td>
             </tr>
             <tr>
                 <td></td>
@@ -36,13 +44,17 @@
             <tr>
                 <td class="lbl"><label for="password">Пароль:</label></td>
                 <td><input type="password" name="password" id="password" class="box"/>
+                    <p class="error"></p>
+                </td>
             </tr>
             <tr>
                 <td></td>
             </tr>
             <tr>
-                <td class="lbl"><label for="checkPassword">Подтвердить:</label></td>
-                <td><input type="password" name="checkPassword" id="checkPassword" class="box"/>
+                <td class="lbl"><label for="confirmPassword">Подтвердить:</label></td>
+                <td><input type="password" name="confirmPassword" id="confirmPassword" class="box"/>
+                    <p class="error"></p>
+                </td>
             </tr>
         </tboby>
     </table>

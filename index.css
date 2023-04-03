@@ -49,6 +49,10 @@ table td.lbl {
     color:rgb(63, 63, 63);
 }
 
+.errorColorBorder {
+    border: 1px solid red;
+}
+
 #info {
     height:100px;
     resize:none;
@@ -65,3 +69,5 @@ table td.lbl {
     font-size:16px;
     color:rgb(255, 255, 255);
 }
+
+
