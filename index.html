@@ -15,27 +15,26 @@
             <tr>
                 <td class="lbl"><label for="firstName">Имя:</label></td>
                 <td><input type="text" name="firstName" id="firstName" class="box"/>
-                    <p class="error"></p>
+                    <p class="errorTextStyle"></p>
                 </td>
             </tr>
             <tr>
                 <td class="lbl"><label for="lastName">Фамилия:</label></td>
                 <td><input type="text" name="lastName" id="lastName" class="box"/>
-                    <p class="error"></p>
+                    <p class="errorTextStyle"></p>
                 </td>
             </tr>
             <tr>
                 <td class="lbl"><label for="dateOfBirthday">Дата рождения:</label></td>
-                <td><input type="date" name="dateOfBirthday" id="dateOfBirthday" value="today"
-                           max="2023-04-02" class="box"/>
-                    <p class="error"></p>
+                <td><input type="date" name="dateOfBirthday" id="dateOfBirthday" value="today" class="box"/>
+                    <p class="errorTextStyle"></p>
                 </td>
 
             </tr>
             <tr>
                 <td class="lbl"><label for="email">E-mail:</label></td>
                 <td><input type="email" name="email" id="email" class="box"/>
-                    <p class="error"></p>
+                    <p class="errorTextStyle"></p>
                 </td>
             </tr>
             <tr>
@@ -44,7 +43,7 @@
             <tr>
                 <td class="lbl"><label for="password">Пароль:</label></td>
                 <td><input type="password" name="password" id="password" class="box"/>
-                    <p class="error"></p>
+                    <p class="errorTextStyle"></p>
                 </td>
             </tr>
             <tr>
@@ -53,12 +52,12 @@
             <tr>
                 <td class="lbl"><label for="confirmPassword">Подтвердить:</label></td>
                 <td><input type="password" name="confirmPassword" id="confirmPassword" class="box"/>
-                    <p class="error"></p>
+                    <p class="errorTextStyle"></p>
                 </td>
             </tr>
         </tboby>
     </table>
-    <input type="submit" value="Отправить заявку" id="send"/>
+    <button type="submit" id="send">Отправить заявку</button>
 </form>
 </body>
 <script src="index.js"></script>

@@ -11,9 +11,14 @@ function validationForm() {
     const dateOfBirthdayCheck = dateOfBirthdayValidation(dateOfBirthday);
     const emailCheck = emailValidation(email);
     const passwordCheck = passwordValidation(password);
-    const confirmPasswordCheck = confirmPasswordValidation(confirmPassword);
+    const confirmPasswordCheck = confirmPasswordValidation(password, confirmPassword);
 
-    return firstNameCheck && lastNameCheck && dateOfBirthdayCheck && emailCheck && passwordCheck && confirmPasswordCheck;
+    if (firstNameCheck && lastNameCheck && dateOfBirthdayCheck && emailCheck && passwordCheck && confirmPasswordCheck) {
+        outputFormBodyToConsole();
+        return true;
+    }
+
+    return false;
 }
 
 function firstNameValidation(firstName) {
@@ -25,7 +30,6 @@ function firstNameValidation(firstName) {
     } else {
         addErrorBorderColor(firstName);
         addErrorText(firstName, 'Имя содержит недопустимые символы и должно содержать не менее 2 и не более 25 символов');
-        firstName.focus();
         return false;
     }
 }
@@ -39,7 +43,6 @@ function lastNameValidation(lastName) {
     } else {
         addErrorBorderColor(lastName);
         addErrorText(lastName, 'Фамилия содержит недопустимые символы и должна содержать не менее 2 и не более 25 символов');
-        lastName.focus();
         return false;
     }
 }
@@ -47,14 +50,12 @@ function lastNameValidation(lastName) {
 function dateOfBirthdayValidation(dateOfBirthday) {
     if (dateOfBirthday.value === '') {
         addErrorBorderColor(dateOfBirthday);
-        addErrorText(dateOfBirthday, 'Укажите дату рождения')
-        dateOfBirthday.focus();
+        addErrorText(dateOfBirthday, 'Укажите дату рождения');
         return false;
     }
     removeErrorBorderColor(dateOfBirthday);
     addErrorText(dateOfBirthday, '');
-    return true
-
+    return true;
 }
 
 function emailValidation(email) {
@@ -65,8 +66,7 @@ function emailValidation(email) {
         return true;
     } else {
         addErrorBorderColor(email);
-        addErrorText(email, "You have entered an invalid email address!");
-        email.focus();
+        addErrorText(email, "Введите валидный имеил");
         return false;
     }
 }
@@ -80,34 +80,58 @@ function passwordValidation(password) {
     } else {
         addErrorBorderColor(password);
         addErrorText(password, 'Пароль должен содержать минимум 8 символов, минимум 1 символ в верхнем регистре, минимум одну цифру 1-9, минимум 1 специальный символ из перечисленных !@#$%');
-        password.focus();
         return false;
     }
-
 }
 
-function confirmPasswordValidation(password, checkPassword) {
-    if (password.value === checkPassword.value) {
-        removeErrorBorderColor(checkPassword);
-        addErrorText(checkPassword, '');
-        return true
+function confirmPasswordValidation(password, confirmPassword) {
+    if (password.value && confirmPassword.value && password.value === confirmPassword.value) {
+        removeErrorBorderColor(confirmPassword);
+        addErrorText(confirmPassword, '');
+        return true;
     } else {
-        addErrorBorderColor(checkPassword);
-        addErrorText(checkPassword, 'Пароли должны совпадать')
-        checkPassword.focus();
-        return false
+        addErrorBorderColor(confirmPassword);
+        addErrorText(confirmPassword, 'Пароли должны совпадать')
+        return false;
     }
-
 }
 
 function addErrorBorderColor(input, errorBorderColor = 'errorColorBorder') {
-    input.classList.add(errorBorderColor)
+    input.classList.add(errorBorderColor);
 }
 
 function removeErrorBorderColor(input, errorBorderColor = 'errorColorBorder') {
-    input.classList.remove(errorBorderColor)
+    input.classList.remove(errorBorderColor);
 }
 
 function addErrorText(input, errorMessage) {
-    input.parentElement.querySelector('p').innerText = errorMessage
+    input.parentElement.querySelector('p').innerText = errorMessage;
+}
+
+function setMaxDate() {
+    const dtToday = new Date();
+
+    let month = dtToday.getMonth() + 1;
+    let day = dtToday.getDate();
+    let year = dtToday.getFullYear();
+
+    if (month < 10) {
+        month = '0' + month.toString();
+    }
+    if (day < 10) {
+        day = '0' + day.toString();
+    }
+
+    let maxDate = year + '-' + month + '-' + day;
+    document.getElementById('dateOfBirthday').setAttribute('max', maxDate);
+}
+
+setMaxDate();
+
+function outputFormBodyToConsole() {
+    const inputs = document.querySelectorAll('form input');
+
+    for (let input of inputs) {
+        console.log(input.getAttribute('name'), input.value);
+    }
 }

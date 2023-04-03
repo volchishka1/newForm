@@ -50,7 +50,12 @@ table td.lbl {
 }
 
 .errorColorBorder {
-    border: 1px solid red;
+    border: 2px solid red;
+}
+
+.errorTextStyle {
+    font-size:12px;
+    color:rgb(0, 184, 246);
 }
 
 #info {
