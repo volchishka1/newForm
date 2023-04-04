@@ -54,6 +54,8 @@ table td.lbl {
 }
 
 .errorTextStyle {
+    text-align: center;
+    width:250px;
     font-size:12px;
     color:rgb(0, 184, 246);
 }
